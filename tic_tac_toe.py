@@ -7,6 +7,13 @@ class TicTacToe():
         ]
     
     def print_board(self):
+        """
+            Returns board as a string
+            e.g
+            x | o | x
+            o | x | o
+            o | x | o
+        """
         board = ""
         for i in range(3):
             for j in range(3):
