@@ -5,9 +5,9 @@ class TicTacToe():
         self.player_1 = 'O'
         self.player_2 = 'X'
         self.board = [
-            ['O','X','O'],
-            ['X','O','X'],
-            ['O','X','X']
+            ['','',''],
+            ['','',''],
+            ['','','']
         ]
     
     def print_board(self):
@@ -42,8 +42,68 @@ class TicTacToe():
     ########################### Player Functions End ###########################
 
     ########################### Game Dynamics ###########################
+    
+    def get_move(self, user_input): 
+        #Need to change this code part in the future to make it dynamic
+        is_valid = False
+        i =0
+        j=0
+        if user_input == 1:
+            is_valid = self.is_valid_move(0,0)
+            i=0
+            j=0
+        elif user_input == 2:
+            is_valid = self.is_valid_move(0,1)
+            i=0
+            j=1
+        elif user_input == 3:
+            is_valid = self.is_valid_move(0,2)
+            i=0
+            j=2
+        elif user_input == 4:
+            is_valid = self.is_valid_move(1,0)
+            i=1
+            j=0
+        elif user_input == 5:
+            is_valid = self.is_valid_move(1,1)
+            i=1
+            j=1
+        elif user_input == 6:
+            is_valid = self.is_valid_move(1,2)
+            i=1
+            j=2
+        elif user_input == 7:
+            is_valid = self.is_valid_move(2,0)
+            i=2
+            j=0
+        elif user_input == 8:
+            is_valid = self.is_valid_move(2,1)
+            i=2
+            j=1
+        elif user_input == 9:
+            is_valid = self.is_valid_move(2,2)
+            i=2
+            j=2
+
+        if is_valid:
+            self.make_move(i,j)
+            self.shift_player()
+        return is_valid
+
+        
+
+
+    def is_valid_move(self,i,j):
+        if self.board[i][j] == '':
+            return True
+        return False
+    def make_move(self,i,j):
+        self.board[i][j] = self.current_player
+
     def win_game(self):
-        pass
+        if self.row_win() or self.col_win() or self.diag_win():
+            return True
+        return False
     
     def row_win(self):
         """
@@ -93,8 +153,20 @@ class TicTacToe():
 obj = TicTacToe()
 print( obj.print_board())
 
-a = obj.diag_win()
-print(a)
+count =0
+while count < 9:
+    a = input()
+    b = obj.get_move(int(a))
+
+    if not b:
+        print("Cannot")
+        continue
+    print(obj.print_board())
+    count += 1
+
+
+# a = obj.win_game()
+# print(a)
 
 
 # a = obj.row_win()
