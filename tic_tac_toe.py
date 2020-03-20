@@ -1,13 +1,13 @@
 import random
 class TicTacToe():
-    def __init__(self,last_player=1):
+    def __init__(self,last_player='O'):
         self.current_player = last_player
-        self.player_1 = 1
-        self.player_2 = 2
+        self.player_1 = 'O'
+        self.player_2 = 'X'
         self.board = [
-            ['1','2','3'],
-            ['4','5','6'],
-            ['7','8','9']
+            ['O','X','O'],
+            ['X','O','X'],
+            ['O','X','X']
         ]
     
     def print_board(self):
@@ -44,17 +44,70 @@ class TicTacToe():
     ########################### Game Dynamics ###########################
     def win_game(self):
         pass
+    
+    def row_win(self):
+        """
+            returns true if current player has three in row 
+        """
+        win = True
+        for i in range(len(self.board)):
+            win = True
+            for j in range( len(self.board) ):
+                if self.board[i][j] != self.current_player:
+                    win = False
+                    break
+            if win:
+                return win
+        return win
 
+    def col_win(self):
+        """
+            returns true if current player has three in column 
+        """
+        win = True
+        for i in range( len(self.board) ):
+            win = True
+            for j in range( len(self.board) ):
+                if self.board[j][i] != self.current_player:
+                    win = False
+                    break
+            if win:
+                return win
+        return win
+
+    def diag_win(self):
+        win = True
+        board_len = len(self.board)
+        for i in range(len(self.board)):
+            win = True
+            for j in range(board_len):
+                # For principal diagonal
+                if (i==j or i+j == board_len-1) and self.board[i][j] != self.current_player:
+                    win = False
+                    break  
+            if win:
+                return win
+        return win 
     ########################### Game Dynamics Ends ###########################
 
 obj = TicTacToe()
 print( obj.print_board())
 
+a = obj.diag_win()
+print(a)
 
-a = obj.get_current_player()
-print( a)
-obj.shift_player()
 
-a = obj.get_current_player()
-print( a)
-obj.shift_player()
+# a = obj.row_win()
+# print(a)
+# obj.shift_player()
+# a = obj.col_win()
+# print(a)
+
+
+# a = obj.get_current_player()
+# print( a)
+# obj.shift_player()
+
+# a = obj.get_current_player()
+# print( a)
+# obj.shift_player()
