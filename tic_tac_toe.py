@@ -90,13 +90,11 @@ class TicTacToe():
             self.shift_player()
         return is_valid
 
-        
-
-
     def is_valid_move(self,i,j):
         if self.board[i][j] == '':
             return True
         return False
+
     def make_move(self,i,j):
         self.board[i][j] = self.current_player
 
@@ -104,7 +102,7 @@ class TicTacToe():
         if self.row_win() or self.col_win() or self.diag_win():
             return True
         return False
-    
+
     def row_win(self):
         """
             returns true if current player has three in row 
