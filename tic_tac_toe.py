@@ -1,9 +1,9 @@
 import random
-class Board():
-    def __init__(self,last_player='Player 1'):
+class TicTacToe():
+    def __init__(self,last_player=1):
         self.current_player = last_player
-        self.player_1 = 'Player 1'
-        self.player_2 = 'Player 2'
+        self.player_1 = 1
+        self.player_2 = 2
         self.board = [
             ['1','2','3'],
             ['4','5','6'],
@@ -41,9 +41,13 @@ class Board():
         return self.current_player
     ########################### Player Functions End ###########################
 
-    
+    ########################### Game Dynamics ###########################
+    def win_game(self):
+        pass
 
-obj = Board()
+    ########################### Game Dynamics Ends ###########################
+
+obj = TicTacToe()
 print( obj.print_board())
 
 
