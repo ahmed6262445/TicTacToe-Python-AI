@@ -4,10 +4,11 @@ class TicTacToe():
         self.current_player = last_player
         self.player_1 = 'O'
         self.player_2 = 'X'
+        self.move_count = 0
         self.board = [
-            ['','',''],
-            ['','',''],
-            ['','','']
+            [' ',' ',' '],
+            [' ',' ',' '],
+            [' ',' ',' ']
         ]
     
     def print_board(self):
@@ -19,10 +20,10 @@ class TicTacToe():
             o | x | o
         """
         board = ""
-        for i in range(3):
-            for j in range(3):
+        for i in range(3):#need to change this in the future
+            for j in range(3):#need to change this in the future
                 board += self.board[i][j]
-                if j != 2:
+                if j != 2:#need to change this in the future
                     board += " | "
             board += "\n"
         return board
@@ -87,11 +88,11 @@ class TicTacToe():
 
         if is_valid:
             self.make_move(i,j)
-            self.shift_player()
+            self.move_count += 1
         return is_valid
 
     def is_valid_move(self,i,j):
-        if self.board[i][j] == '':
+        if self.board[i][j] == ' ':
             return True
         return False
 
@@ -134,18 +135,10 @@ class TicTacToe():
         return win
 
     def diag_win(self):
-        win = True
-        board_len = len(self.board)
-        for i in range(len(self.board)):
-            win = True
-            for j in range(board_len):
-                # For principal diagonal
-                if (i==j or i+j == board_len-1) and self.board[i][j] != self.current_player:
-                    win = False
-                    break  
-            if win:
-                return win
-        return win 
+        # Need to change this in future
+        if self.board[0][0] == self.current_player and self.board[1][1] == self.current_player and self.board[2][2] == self.current_player or self.board[0][2] == self.current_player and self.board[1][1] == self.current_player and self.board[0][2] == self.current_player:
+            return True
+        return False
     ########################### Game Dynamics Ends ###########################
 
 obj = TicTacToe()
@@ -160,24 +153,14 @@ while count < 9:
         print("Cannot")
         continue
     print(obj.print_board())
+
+    win=obj.win_game()
+    print(win)
+    if win:
+        print(obj.current_player)
+        break
+    obj.shift_player()
     count += 1
 
 
-# a = obj.win_game()
-# print(a)
 
-
-# a = obj.row_win()
-# print(a)
-# obj.shift_player()
-# a = obj.col_win()
-# print(a)
-
-
-# a = obj.get_current_player()
-# print( a)
-# obj.shift_player()
-
-# a = obj.get_current_player()
-# print( a)
-# obj.shift_player()
