@@ -28,6 +28,25 @@ class TicTacToe():
             board += "\n"
         return board
 
+    def print_hint_board(self):
+        """
+            Returns board as a string
+            e.g
+            1 | 2 | 3
+            4 | 5 | 6
+            7 | 8 | 9 
+        """
+        board = ""
+        count = 1 
+        for i in range(3):#need to change this in the future
+            for j in range(3):#need to change this in the future
+                board += str(count) 
+                count += 1
+                if j != 2:#need to change this in the future
+                    board += " | "
+            board += "\n"
+        return board
+
     ########################### Player Functions ###########################
     def shift_player(self):
         if self.current_player == self.player_1:
