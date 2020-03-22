@@ -1,9 +1,9 @@
 import random
 class TicTacToe():
-    def __init__(self,last_player='O'):
+    def __init__(self,player_1= 'O', player_2 = 'X', last_player='O'):
         self.current_player = last_player
-        self.player_1 = 'O'
-        self.player_2 = 'X'
+        self.player_1 = player_1
+        self.player_2 = player_2
         self.move_count = 0
         self.board = [
             [' ',' ',' '],
