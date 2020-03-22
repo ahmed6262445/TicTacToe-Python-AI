@@ -28,6 +28,7 @@ while True:
                 print("Invalide input...")
                 sleep(1)
                 continue
+        # Game While Loop Ends
         sleep(5)
     elif main_input == '2':
         while True:
