@@ -139,28 +139,11 @@ class TicTacToe():
         if self.board[0][0] == self.current_player and self.board[1][1] == self.current_player and self.board[2][2] == self.current_player or self.board[0][2] == self.current_player and self.board[1][1] == self.current_player and self.board[0][2] == self.current_player:
             return True
         return False
+
+    def game_over(self):
+        if self.move_count == 9 or self.win_game():
+            return True
+        return False
     ########################### Game Dynamics Ends ###########################
-
-obj = TicTacToe()
-print( obj.print_board())
-
-count =0
-while count < 9:
-    a = input()
-    b = obj.get_move(int(a))
-
-    if not b:
-        print("Cannot")
-        continue
-    print(obj.print_board())
-
-    win=obj.win_game()
-    print(win)
-    if win:
-        print(obj.current_player)
-        break
-    obj.shift_player()
-    count += 1
-
-
+    
 
