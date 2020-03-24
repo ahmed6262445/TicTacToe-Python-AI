@@ -105,10 +105,6 @@ class TicTacToe():
             is_valid = self.is_valid_move(2,2)
             self.x = 2
             self.y = 2
-
-        if is_valid:
-            self.make_move()
-            self.move_count += 1
         return is_valid
 
     def is_valid_move(self,i,j):
@@ -118,6 +114,7 @@ class TicTacToe():
 
     def make_move(self):
         self.board[self.x][self.y] = self.current_player
+        self.move_count += 1
 
     def game_draw(self):
         return self.move_count == 9 and not self.win_game()
@@ -168,5 +165,3 @@ class TicTacToe():
             return True
         return False
     ########################### Game Dynamics Ends ###########################
-    
-
