@@ -156,7 +156,7 @@ class TicTacToe():
 
     def diag_win(self):
         # Need to change this in future
-        if self.board[0][0] == self.current_player and self.board[1][1] == self.current_player and self.board[2][2] == self.current_player or self.board[0][2] == self.current_player and self.board[1][1] == self.current_player and self.board[0][2] == self.current_player:
+        if (self.board[0][0] == self.current_player and self.board[1][1] == self.current_player and self.board[2][2] == self.current_player) or (self.board[0][2] == self.current_player and self.board[1][1] == self.current_player and self.board[2][0] == self.current_player):
             return True
         return False
 
