@@ -2,6 +2,7 @@ from tic_tac_toe import TicTacToe
 from os import system
 import getch as inp
 from time import sleep
+import colors
 clear = lambda: system('clear')
 
 player_1 = 'O'
@@ -13,11 +14,11 @@ print("Loading...")
 sleep(1)
 while True:
     clear()
-    print("Tic Tac Toe\n1) Start Game\n2) Settings\n3) Exit")
+    print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n1) {colors.underline}Start Game{colors.reset}\n2) {colors.underline}Settings{colors.reset}\n3) {colors.underline}Exit{colors.reset}")
     main_input = inp.getch()
 
     if main_input == '1':
-        print("Loading...")
+        print(f"{colors.fg.blue}Loading...{colors.reset}")
         sleep(1)
         tictactoe = TicTacToe(player_1=player_1, player_2=player_2, last_player=plays_first)
         
@@ -30,17 +31,20 @@ while True:
         player_before_shift = tictactoe.get_current_player()
         while True:
             clear()
-            print("Tic Tac Toe\nEnter 'q' to quit the game.\nEnter 'h' to print help board.\n")
+            print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n{colors.fg.blue}Enter 'q' to quit the game.\nEnter 'h' to print help board.{colors.reset}\n")
             if help_board:
-                print(tictactoe.print_hint_board())
+                print(f"{colors.fg.blue}{tictactoe.print_hint_board()}{colors.reset}")
             print (tictactoe.print_board())
 
-            print(f"Player 1 = {player_1}\tPlayer 2 = {player_2}")
-            print(f"{tictactoe.get_current_player()}'s Turn")
-            game_input = input('Enter value from 1-9: ')
+            if tictactoe.get_current_player() == tictactoe.player_1:
+                print(f"{colors.bold}{colors.bg.red}{colors.underline}Player 1 = {player_1}{colors.reset}\tPlayer 2 = {player_2}")
+            else:
+                print(f"Player 1 = {player_1}{colors.bold}{colors.bg.red}\tPlayer 2 = {player_2}{colors.reset}")
+            print(f"\n{tictactoe.get_current_player()}'s Turn")
+            game_input = input(f"{colors.bold}{colors.underline}Enter value from 1-9:{colors.reset} ")
 
             if game_input == 'q':
-                print("Quiting game...")
+                print(f"{colors.fg.red}Quiting game...{colors.reset}")
                 sleep(2)
                 break
             elif game_input == 'h':
@@ -59,14 +63,17 @@ while True:
                 else:
                     print("Place alreay occupied...")
                     sleep(1)
+                    continue
 
             player_before_shift = tictactoe.get_current_player()
             if tictactoe.win_game():
                 clear()
-                print(f"Tic Tac Toe\n\n{tictactoe.print_board()}")
+                print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n{tictactoe.print_board()}")
                 print(f"Player {player_before_shift} Won")
                 break
             elif tictactoe.game_draw():
+                clear()
+                print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n{tictactoe.print_board()}")
                 print(f"Game is draw.")
                 break
             tictactoe.shift_player()
@@ -78,7 +85,7 @@ while True:
     elif main_input == '2':
         while True:
             clear()
-            print(f"Tic Tac Toe\nSettings\n1)Change Symbols\n\tPlayer 1 = {player_1}\n\tPlayer 2 = {player_2}\n2) Go Back")
+            print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\nSettings\n1) Change Symbols\n\tPlayer 1 = {player_1}\n\tPlayer 2 = {player_2}\n2) Go Back")
             setting_input = inp.getch()
             if setting_input == '1':
                 temp = player_1

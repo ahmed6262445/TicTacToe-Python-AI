@@ -1,5 +1,6 @@
 reset='\033[0m'
 bold='\033[01m'
+italic  = '\033[03m'
 disable='\033[02m'
 underline='\033[04m'
 reverse='\033[07m'
