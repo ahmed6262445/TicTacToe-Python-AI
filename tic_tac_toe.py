@@ -5,6 +5,9 @@ class TicTacToe():
         self.player_1 = player_1
         self.player_2 = player_2
         self.move_count = 0
+
+        self.x = -1 # row of matrix
+        self.y = -1 # column of matrix
         self.board = [
             [' ',' ',' '],
             [' ',' ',' '],
@@ -66,47 +69,45 @@ class TicTacToe():
     def get_move(self, user_input): 
         #Need to change this code part in the future to make it dynamic
         is_valid = False
-        i =0
-        j=0
         if user_input == 1:
             is_valid = self.is_valid_move(0,0)
-            i=0
-            j=0
+            self.x = 0
+            self.y = 0
         elif user_input == 2:
             is_valid = self.is_valid_move(0,1)
-            i=0
-            j=1
+            self.x = 0
+            self.y = 1
         elif user_input == 3:
             is_valid = self.is_valid_move(0,2)
-            i=0
-            j=2
+            self.x = 0
+            self.y = 2
         elif user_input == 4:
             is_valid = self.is_valid_move(1,0)
-            i=1
-            j=0
+            self.x = 1
+            self.y = 0
         elif user_input == 5:
             is_valid = self.is_valid_move(1,1)
-            i=1
-            j=1
+            self.x = 1
+            self.y = 1
         elif user_input == 6:
             is_valid = self.is_valid_move(1,2)
-            i=1
-            j=2
+            self.x = 1
+            self.y = 2
         elif user_input == 7:
             is_valid = self.is_valid_move(2,0)
-            i=2
-            j=0
+            self.x = 2
+            self.y = 0
         elif user_input == 8:
             is_valid = self.is_valid_move(2,1)
-            i=2
-            j=1
+            self.x = 2
+            self.y = 1
         elif user_input == 9:
             is_valid = self.is_valid_move(2,2)
-            i=2
-            j=2
+            self.x = 2
+            self.y = 2
 
         if is_valid:
-            self.make_move(i,j)
+            self.make_move()
             self.move_count += 1
         return is_valid
 
@@ -115,8 +116,11 @@ class TicTacToe():
             return True
         return False
 
-    def make_move(self,i,j):
-        self.board[i][j] = self.current_player
+    def make_move(self):
+        self.board[self.x][self.y] = self.current_player
+
+    def game_draw(self):
+        return self.move_count == 9 and not self.win_game()
 
     def win_game(self):
         if self.row_win() or self.col_win() or self.diag_win():
@@ -160,7 +164,7 @@ class TicTacToe():
         return False
 
     def game_over(self):
-        if self.move_count == 9 or self.win_game():
+        if self.game_draw() or self.win_game():
             return True
         return False
     ########################### Game Dynamics Ends ###########################
