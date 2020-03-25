@@ -106,7 +106,7 @@ while True:
             if tictactoe.get_current_player() == tictactoe.player_1:
                 print(f"{colors.bold}{colors.bg.red}{colors.underline}Player 1 = {player_1}{colors.reset}\tPlayer 2 = {player_2}")
             else:
-                print(f"Player 1 = {player_1}{colors.bold}{colors.bg.red}\tPlayer 2 = {player_2}{colors.reset}")
+                print(f"Player 1 = {player_1}{colors.bold}{colors.bg.red}{colors.underline}\tPlayer 2 = {player_2}{colors.reset}")
             print(f"\n{tictactoe.get_current_player()}'s Turn")
             game_input = input(f"{colors.bold}{colors.underline}Enter value from 1-9:{colors.reset} ")
 
