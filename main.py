@@ -33,6 +33,15 @@ def clear():
     else:
         system('clear')
 
+def get_input():
+    """
+    Gets instant input from the console
+    """
+    if 'windows' in os_name:
+        return get_input()
+    else:
+        return inp.getch()
+
 graph = AdjacencyMatrixGraph(9)
 
 graph.add_edge(0,1)
@@ -73,7 +82,7 @@ sleep(1)
 while True:
     clear()
     print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n1) {colors.underline}Start Game{colors.reset}\n2) {colors.underline}Settings{colors.reset}\n3) {colors.underline}Exit{colors.reset}")
-    main_input = inp.getch()
+    main_input = get_input()
 
     if main_input == '1':
         print(f"{colors.fg.blue}Loading...{colors.reset}")
@@ -138,13 +147,13 @@ while True:
         # Game While Loop Ends
         print("Press Enter to continue...")
         while True:
-            if ord(inp.getch()) == 10:
+            if ord(get_input()) == 10:
                 break
     elif main_input == '2':
         while True:
             clear()
             print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\nSettings\n1) Change Symbols\n\tPlayer 1 = {player_1}\n\tPlayer 2 = {player_2}\n2) Go Back")
-            setting_input = inp.getch()
+            setting_input = get_input()
             if setting_input == '1':
                 temp = player_1
                 player_1 = player_2

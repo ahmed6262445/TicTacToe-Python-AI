@@ -12,11 +12,13 @@ if os_name == 'windows':
     try:
         import msvcrt 
     except ImportError as e:
+        print("Installing msvcrt...")
         install_package('msvcrt')
 else:
     try:
         import getch
     except ImportError as e:
+        print("Installing getch...")
         install_package('getch')
 
 import main
