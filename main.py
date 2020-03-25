@@ -38,7 +38,7 @@ def get_input():
     Gets instant input from the console
     """
     if 'windows' in os_name:
-        return get_input()
+        return inp.getch().decode('ASCII')
     else:
         return inp.getch()
 
