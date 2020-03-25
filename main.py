@@ -2,18 +2,32 @@ from tic_tac_toe import TicTacToe
 from os import system
 from time import sleep
 import colors
-import getch as inp
+# import getch as inp
 import platform
 from adjacency_matrix_graph import AdjacencyMatrixGraph
 from depth_first_search import *
 from breadth_first_search import *
 from os import system
 
+os_name = platform.system().lower()
+
+if 'windows' in os_name:
+    try:
+        import msvcrt 
+    except ImportError as e:
+        print(e)
+        exit()
+else:
+    try:
+        import getch
+    except ImportError as e:
+        print(e)
+        exit()
+
 def clear():
     """
     Clears the console
     """
-    os_name = platform.system().lower()
     if 'windows' in os_name:
         system('cls')
     else:
