@@ -147,7 +147,8 @@ while True:
         # Game While Loop Ends
         print("Press Enter to continue...")
         while True:
-            if ord(get_input()) == 10:
+            i = get_input()
+            if i == '\r' or i == '\n':
                 break
     elif main_input == '2':
         while True:
