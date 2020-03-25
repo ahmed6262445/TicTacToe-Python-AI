@@ -10,6 +10,12 @@ class AdjacencyMatrixGraph(Graph):
 
 		self.matrix = np.zeros((num_vertices, num_vertices)) 
 
+	def set_graph(self,graph):
+		"""
+			Sets the matrix from already existing graph
+		"""
+		self.matrix = graph
+
 	def add_edge(self, v1, v2, weight=1):
 		"""
 		connects two vertices
