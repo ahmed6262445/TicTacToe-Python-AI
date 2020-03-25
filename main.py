@@ -13,13 +13,13 @@ os_name = platform.system().lower()
 
 if 'windows' in os_name:
     try:
-        import msvcrt 
+        import msvcrt as inp
     except ImportError as e:
         print(e)
         exit()
 else:
     try:
-        import getch
+        import getch as inp
     except ImportError as e:
         print(e)
         exit()
