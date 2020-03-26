@@ -2,7 +2,6 @@ from tic_tac_toe import TicTacToe
 from os import system
 from time import sleep
 import colors
-# import getch as inp
 import platform
 from os import system
 
@@ -110,8 +109,10 @@ while True:
                 print(f"Game is draw.")
                 break
             tictactoe.shift_player()
+
         # Game While Loop Ends
         print("Press Enter to continue...")
+        
         while True:
             i = get_input()
             if i == '\r' or i == '\n':
