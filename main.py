@@ -6,7 +6,8 @@ import platform
 from os import system
 # from mini_max import *
 from random import randrange
-from deapth_first_search import *
+# from deapth_first_search import *
+from breadth_first_search import *
 
 os_name = platform.system().lower()
 
@@ -161,6 +162,8 @@ while True:
                 while True:
                     # ai_move = randrange(1,9)
                     ai_move = best_move(tictactoe)
+                    print(ai_move)
+                    # sleep(6)
                     if tictactoe.is_valid_move(ai_move[0],ai_move[1]):
                         tictactoe.board[ai_move[0]][ai_move[1]] = tictactoe.player_2
                         tictactoe.shift_player()
