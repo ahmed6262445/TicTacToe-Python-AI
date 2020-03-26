@@ -4,8 +4,9 @@ from time import sleep
 import colors
 import platform
 from os import system
-from mini_max import *
+# from mini_max import *
 from random import randrange
+from deapth_first_search import *
 
 os_name = platform.system().lower()
 
