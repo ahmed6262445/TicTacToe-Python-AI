@@ -4,6 +4,8 @@ from time import sleep
 import colors
 import platform
 from os import system
+from mini_max import *
+from random import randrange
 
 os_name = platform.system().lower()
 
@@ -38,47 +40,65 @@ def get_input():
     else:
         return inp.getch()
 
-player_1 = 'O'
-player_2 = 'X'
-plays_first = 'O'
+plays_first = 'X'
 clear()
 print("Loading...")
 sleep(1)
 while True:
     clear()
-    print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n1) {colors.underline}Start Game{colors.reset}\n2) {colors.underline}Settings{colors.reset}\n3) {colors.underline}Exit{colors.reset}")
+    print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n1) {colors.underline}Start Game{colors.reset}\n2) {colors.underline}Exit{colors.reset}")
     main_input = get_input()
 
     if main_input == '1':
         print(f"{colors.fg.blue}Loading...{colors.reset}")
         sleep(1)
-        tictactoe = TicTacToe(player_1=player_1, player_2=player_2, last_player=plays_first)
-        
+        tictactoe = TicTacToe(last_player=plays_first)
         help_board = False
 
-        tictactoe.shift_player()
-        plays_first = tictactoe.get_current_player()
-        tictactoe.shift_player()
+        clear()
+        print(f"1) Play with another player\n2) Play with AI")
 
-        player_before_shift = tictactoe.get_current_player()
+        is_ai = False
+        
+        while True:
+            ai_choice = get_input()
+
+            if ai_choice == '1':
+                break
+            elif ai_choice == '2':
+                is_ai = True
+                break 
+
         while True:
             clear()
             print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n{colors.fg.blue}Enter 'q' to quit the game.\nEnter 'h' to print help board.{colors.reset}\n")
+
             if help_board:
                 print(f"{colors.fg.blue}{tictactoe.print_hint_board()}{colors.reset}")
             print (tictactoe.print_board())
 
-            if tictactoe.get_current_player() == tictactoe.player_1:
-                print(f"{colors.bold}{colors.bg.red}{colors.underline}Player 1 = {player_1}{colors.reset}\tPlayer 2 = {player_2}")
+            winner = tictactoe.check_winner()
+            if winner == 'tie':
+                print(f"\n{colors.bold}{colors.underline}Game is a TIE!")
+                break
+            elif winner == tictactoe.player_1:
+                print(f"{colors.bold}{colors.underline}{colors.fg.green}Player 1 ({tictactoe.player_1}) Won{colors.reset}")
+                break
+            elif winner == tictactoe.player_2:
+                print(f"{colors.bold}{colors.underline}{colors.fg.green}Player 2 ({tictactoe.player_2}) Won{colors.reset}")
+                break
+
+            if tictactoe.current_player == tictactoe.player_1:
+                print(f"{colors.bold}{colors.underline}{colors.bg.red}Player 1 = {tictactoe.player_1} {colors.reset}\tPlayer 2 = {tictactoe.player_2}")
             else:
-                print(f"Player 1 = {player_1}{colors.bold}{colors.bg.red}{colors.underline}\tPlayer 2 = {player_2}{colors.reset}")
-            print(f"\n{tictactoe.get_current_player()}'s Turn")
-            game_input = input(f"{colors.bold}{colors.underline}Enter value from 1-9:{colors.reset} ")
+                print(f"Player 1 = {tictactoe.player_1}\t{colors.bold}{colors.underline}{colors.bg.red}Player 2 = {tictactoe.player_2} {colors.reset}")
+            print(f"\n{colors.underline}{tictactoe.current_player}'s Turn to play'{colors.reset}")
+            game_input = input(f"{colors.bold}{colors.underline}Please select input (1-9):{colors.reset} ")
 
             if game_input == 'q':
                 print(f"{colors.fg.red}Quiting game...{colors.reset}")
                 sleep(2)
-                break
+                break # Breaks Game Loop
             elif game_input == 'h':
                 if help_board == True:
                     help_board = False
@@ -89,51 +109,37 @@ while True:
                 print("Invalide input...")
                 sleep(1)
                 continue
-            else:
-                if tictactoe.get_move(int(game_input)):
-                    tictactoe.make_move()
-                else:
-                    print("Place alreay occupied...")
-                    sleep(1)
-                    continue
 
-            player_before_shift = tictactoe.get_current_player()
-            if tictactoe.win_game():
-                clear()
-                print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n{tictactoe.print_board()}")
-                print(f"Player {player_before_shift} Won")
-                break
-            elif tictactoe.game_draw():
-                clear()
-                print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n{tictactoe.print_board()}")
-                print(f"Game is draw.")
-                break
-            tictactoe.shift_player()
+            if tictactoe.set_move(int(game_input)):
+                tictactoe.make_move()
+                tictactoe.shift_player()
+
+                winner = tictactoe.check_winner()
+                if winner == tictactoe.player_1:
+                    continue
+                elif winner == 'tie':
+                    continue
+                
+                if is_ai:
+                    while True:
+                        ai_move = randrange(1,9)
+                        if tictactoe.set_move(ai_move):
+                            tictactoe.make_move()
+                            tictactoe.shift_player()
+                            break
+                # AI Move LOOp
+            else:
+                print(f"Place Already Occupied")
+                sleep(1)
 
         # Game While Loop Ends
         print("Press Enter to continue...")
-        
+    # Choice '1' If Ends
         while True:
             i = get_input()
             if i == '\r' or i == '\n':
                 break
     elif main_input == '2':
-        while True:
-            clear()
-            print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\nSettings\n1) Change Symbols\n\tPlayer 1 = {player_1}\n\tPlayer 2 = {player_2}\n2) Go Back")
-            setting_input = get_input()
-            if setting_input == '1':
-                temp = player_1
-                player_1 = player_2
-                player_2 = temp
-                print("Changing symbols...")
-                sleep(1.5)
-                print("Symbols changed successfully!")
-                sleep(1.25)
-            elif setting_input == '2':
-                break #breaks Setings While Loop
-        # Settings While Loop ends
-    elif main_input == '3':
         clear()
         exit()
 # Main While Loop ends

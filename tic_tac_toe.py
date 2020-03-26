@@ -1,6 +1,6 @@
 import random
 class TicTacToe():
-    def __init__(self,player_1= 'O', player_2 = 'X', last_player='O'):
+    def __init__(self,player_1= 'X', player_2 = 'O', last_player='X'):
         self.current_player = last_player
         self.player_1 = player_1
         self.player_2 = player_2
@@ -57,16 +57,11 @@ class TicTacToe():
         else:
             self.current_player = self.player_1
 
-    def get_current_player(self):
-        """
-            returns current player
-        """
-        return self.current_player
     ########################### Player Functions End ###########################
 
     ########################### Game Dynamics ###########################
     
-    def get_move(self, user_input): 
+    def set_move(self, user_input): 
         #Need to change this code part in the future to make it dynamic
         is_valid = False
         if user_input == 1:
@@ -114,54 +109,38 @@ class TicTacToe():
 
     def make_move(self):
         self.board[self.x][self.y] = self.current_player
-        self.move_count += 1
 
-    def game_draw(self):
-        return self.move_count == 9 and not self.win_game()
+    def check_winner(self):
+        winner = None
+        board_length = len(self.board)
+        
+        # Horizontal Winner
+        for i in range(board_length):
+            if self.board[i][0] == self.board[i][1] == self.board[i][2] != ' ':
+                winner = self.board[i][0]
 
-    def win_game(self):
-        if self.row_win() or self.col_win() or self.diag_win():
-            return True
-        return False
+        # Vertical Winner
+        for i in range(board_length):
+            if self.board[0][i] == self.board[1][i] == self.board[2][i] != ' ':
+                winner = self.board[0][i]
 
-    def row_win(self):
-        """
-            returns true if current player has three in row 
-        """
-        win = True
-        for i in range(len(self.board)):
-            win = True
-            for j in range( len(self.board) ):
-                if self.board[i][j] != self.current_player:
-                    win = False
-                    break
-            if win:
-                return win
-        return win
+        # Principle Diagonal Winner
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] != ' ':
+            winner = self.board[0][0]
 
-    def col_win(self):
-        """
-            returns true if current player has three in column 
-        """
-        win = True
-        for i in range( len(self.board) ):
-            win = True
-            for j in range( len(self.board) ):
-                if self.board[j][i] != self.current_player:
-                    win = False
-                    break
-            if win:
-                return win
-        return win
+        # Secondary Diagonal Winner
+        if self.board[2][0] == self.board[1][1] == self.board[0][2] != ' ':
+            winner = self.board[2][0]
 
-    def diag_win(self):
-        # Need to change this in future
-        if (self.board[0][0] == self.current_player and self.board[1][1] == self.current_player and self.board[2][2] == self.current_player) or (self.board[0][2] == self.current_player and self.board[1][1] == self.current_player and self.board[2][0] == self.current_player):
-            return True
-        return False
+        open_spots = 0
 
-    def game_over(self):
-        if self.game_draw() or self.win_game():
-            return True
-        return False
+        for i in range(board_length):
+            for j in range(board_length):
+                if self.board[i][j] == ' ':
+                    open_spots += 1
+
+        if winner == None and open_spots == 0:
+            return 'tie'
+        else:
+            return winner
     ########################### Game Dynamics Ends ###########################
