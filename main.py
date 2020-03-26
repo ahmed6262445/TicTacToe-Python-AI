@@ -122,12 +122,13 @@ while True:
                 
                 if is_ai:
                     while True:
-                        ai_move = randrange(1,9)
-                        if tictactoe.set_move(ai_move):
-                            tictactoe.make_move()
+                        # ai_move = randrange(1,9)
+                        ai_move = best_move(tictactoe)
+                        if tictactoe.is_valid_move(ai_move[0],ai_move[1]):
+                            tictactoe.board[ai_move[0]][ai_move[1]] = tictactoe.player_2
                             tictactoe.shift_player()
                             break
-                # AI Move LOOp
+                # AI Move Loop
             else:
                 print(f"Place Already Occupied")
                 sleep(1)
