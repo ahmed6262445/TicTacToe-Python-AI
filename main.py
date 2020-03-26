@@ -4,9 +4,6 @@ from time import sleep
 import colors
 # import getch as inp
 import platform
-from adjacency_matrix_graph import AdjacencyMatrixGraph
-from depth_first_search import *
-from breadth_first_search import *
 from os import system
 
 os_name = platform.system().lower()
@@ -41,37 +38,6 @@ def get_input():
         return inp.getch().decode('ASCII')
     else:
         return inp.getch()
-
-graph = AdjacencyMatrixGraph(9)
-
-graph.add_edge(0,1)
-graph.add_edge(0,3)
-graph.add_edge(0,4)
-
-graph.add_edge(1,2)
-graph.add_edge(1,4)
-
-graph.add_edge(2,4)
-graph.add_edge(2,5)
-
-graph.add_edge(3,4)
-graph.add_edge(3,6)
-
-graph.add_edge(4,5)
-graph.add_edge(4,6)
-graph.add_edge(4,7)
-graph.add_edge(4,8)
-
-graph.add_edge(5,8)
-
-graph.add_edge(6,7)
-
-graph.add_edge(7,8)
-
-# depth_first(graph)
-# print("Breadth First Search")
-# breadth_first(graph)
-# exit()
 
 player_1 = 'O'
 player_2 = 'X'
