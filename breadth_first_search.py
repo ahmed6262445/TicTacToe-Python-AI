@@ -32,13 +32,19 @@ def breadth_first_search(game):
         for i in range(board_length):
             for j in range(board_length):  
                 if node.is_valid_move(i,j):
-                    if is_maximizing:
+                    depth = cal_depth(node.board)
+                    if depth%2 == 0:
                         node.board[i][j] = game.player_2
                     else:             
                         node.board[i][j] = game.player_1
                     queue.put(deepcopy(node))
                     node.board[i][j] = ' '
-        if is_maximizing:
-            is_maximizing = False
-        else:
-            is_maximizing = True
+
+def cal_depth(board):
+    count = 0 
+    board_length = len(board)
+    for i in range(board_length):
+        for j in range(board_length):
+            if board[i][j] != ' ':
+                count += 1
+    return count 
