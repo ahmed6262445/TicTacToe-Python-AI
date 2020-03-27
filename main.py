@@ -6,8 +6,8 @@ import platform
 from os import system
 # from mini_max import *
 from random import randrange
-# from deapth_first_search import *
-from breadth_first_search import *
+from depth_first_search import *
+# from breadth_first_search import *
 
 os_name = platform.system().lower()
 
