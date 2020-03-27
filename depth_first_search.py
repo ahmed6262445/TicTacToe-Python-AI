@@ -54,7 +54,7 @@ def best_move(game):
     move = []
 
     board_length = len(game.board)
-
+    result = None
     for i in range(board_length):
         for j in range(board_length):
             if game.is_valid_move(i,j):
@@ -64,6 +64,8 @@ def best_move(game):
                 if result == 'tie' or result == game.player_2:
                     move = [i,j]
                     return move
+                elif result == game.player_1:
+                    move = [i,j] 
     return move
 
 from copy import deepcopy
@@ -91,6 +93,7 @@ def breadth_first_search(game):
                         node.board[i][j] = game.player_1
                     queue.put(deepcopy(node))
                     node.board[i][j] = ' '
+        
 
 
 def cal_depth(board):
@@ -104,7 +107,16 @@ def cal_depth(board):
 
 obj = TicTacToe()
 
-# obj.board[0][0] = 'X'
+# obj.board[0][0] = 'O'
+# obj.board[2][1] = 'X'
+# obj.board[0][1] = 'O'
+# obj.board[0][2] = 'X'
+# obj.board[1][0] = 'O'
+# obj.board[2][0] = 'X'
+obj.board[0][0] = 'O'
+obj.board[0][1] = 'O'
+obj.board[2][2] = 'X'
+obj.board[0][2] = 'X'
 
 print(obj.print_board())
 move=best_move(obj)
