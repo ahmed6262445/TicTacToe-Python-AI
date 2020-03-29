@@ -1,0 +1,2 @@
+Use run.py to install all the dependencies of the project
+Thank you
