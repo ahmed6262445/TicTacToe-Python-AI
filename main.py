@@ -6,9 +6,9 @@ import platform
 from os import system
 # from mini_max import *
 from random import randrange
-# from depth_first_search import *
-from breadth_first_search import *
-
+import depth_first_search
+import breadth_first_search
+from time import time
 os_name = platform.system().lower()
 
 if 'windows' in os_name:
@@ -99,11 +99,28 @@ while True:
                     ai_turn = True
                 break
         # Goes first choice Loop Ends
+
+        is_depth_first = False
+        clear()
+        if is_ai:
+            print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n1) {colors.underline}Use Depth First search{colors.reset}\n2) {colors.underline}Use Breadth First search{colors.reset}")
+            while True:
+                bf_choice = get_input()
+                if bf_choice == '1':
+                    is_depth_first = True
+                    break
+                elif bf_choice == '2':
+                    is_depth_first = False
+                    break
+        time_str = 'Time taken by AI'
+        end_time = 0
+        start_time = 0 
         while True:
-
             clear()
-            print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n{colors.fg.blue}Enter 'q' to quit the game.\nEnter 'h' to print help board.{colors.reset}\n")
 
+            print(f"{colors.bold}{colors.underline}Tic Tac Toe{colors.reset}\n\n{colors.fg.blue}Enter 'q' to quit the game.\nEnter 'h' to print help board.{colors.reset}\n")
+            if is_ai:
+                print(f"{colors.fg.blue}{time_str} =  {round(end_time-start_time,4)} seconds{colors.reset}")
             if help_board:
                 print(f"{colors.fg.blue}{tictactoe.print_hint_board()}{colors.reset}")
             print (tictactoe.print_board())
@@ -160,8 +177,15 @@ while True:
 
             if is_ai:
                 while True:
-                    ai_move = best_move(tictactoe)
-                    print(ai_move)
+                    time_str = ''
+                    start_time = time()
+                    if is_depth_first:
+                        ai_move = depth_first_search.best_move(tictactoe)
+                        time_str = 'Depth First Search Time'
+                    else:
+                        ai_move = breadth_first_search.best_move(tictactoe)
+                        time_str = 'Breadth First Search Time'
+                    end_time = time()
                         # sleep(6)
                     if tictactoe.is_valid_move(ai_move[0],ai_move[1]):
                         tictactoe.board[ai_move[0]][ai_move[1]] = tictactoe.player_2

@@ -1,4 +1,3 @@
-from tic_tac_toe import TicTacToe
 # def best_move(game):
 #     move = []
 #     result = None
@@ -42,7 +41,6 @@ from tic_tac_toe import TicTacToe
 #         else:
 #             is_maximizing = True
 #     return result
-from random import randrange
 def best_move(game):
     """
     Returns a list of x and y co-ordinates of the move
@@ -84,12 +82,15 @@ def depth_first_search(game,x,y):
     # move = []
     nodes_stack = []
     moves_stack = []
+    steps_stack = []
     steps = 0
     nodes_stack.append(deepcopy(game))
     moves_stack.append([x,y])
+    steps_stack.append(steps)
 
     while len(nodes_stack) != 0:
         node = deepcopy(nodes_stack.pop())
+        steps = steps_stack.pop()
         # move = moves_stack.pop()
 
         result = node.check_winner()
@@ -121,6 +122,7 @@ def depth_first_search(game,x,y):
                 else:
                     node.board[x_position][y_position] = node.player_1
                 nodes_stack.append(deepcopy(node))
+                steps_stack.append(steps)
                 moves_stack.append([x_position,y_position])
                 node.board[x_position][y_position] = ' '
             else:
@@ -131,6 +133,7 @@ def depth_first_search(game,x,y):
                 else:
                         node.board[x_position][y_position] = node.player_1
                 nodes_stack.append(deepcopy(node))
+                steps_stack.append(steps)
                 moves_stack.append([x_position,y_position])
                 node.board[x_position][y_position] = ' '
         # Turn shuffling between O and X
