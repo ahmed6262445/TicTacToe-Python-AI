@@ -20,5 +20,10 @@ else:
     except ImportError as e:
         print("Installing getch...")
         install_package('getch')
+try:
+    import numpy
+except ImportError as e:
+    print("Installing numpy...")
+    install_package('getch')
 
 import main
