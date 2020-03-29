@@ -143,5 +143,13 @@ class TicTacToe():
             return 'tie'
         else:
             return winner
+
+    def is_empty(self):
+        board_length = len(self.board)
+        for i in range(board_length):
+            for j in range(board_length):
+                if self.board[i][j] != ' ':
+                    return False
+        return True
     ########################### Game Dynamics Ends ###########################
     
