@@ -56,7 +56,7 @@ def best_move(game):
     board_length = len(game.board)
     no_step = float('inf') # to track no of steps taken to acheive a goal
     steps = float('inf')
-    last_result = 'O'
+    # last_result = 'O'
     for i in range(board_length):
         for j in range(board_length):
             if game.is_valid_move(i,j):
@@ -66,7 +66,7 @@ def best_move(game):
                 if (result == game.player_2 or result == 'tie') and (steps < no_step):
                     move = [i,j]
                     no_step = steps
-                    last_result = result
+                    # last_result = result
                 elif steps < no_step:
                     move = [i,j]
             # if game.board[i][j] == game.player_2:
@@ -81,7 +81,7 @@ dc = [0 , 0, 1, -1, -1, 1, 1, -1]
 def depth_first_search(game,x,y):
     board_length = len(game.board)
     is_maximizing = False
-    move = []
+    # move = []
     nodes_stack = []
     moves_stack = []
     steps = 0
@@ -90,7 +90,7 @@ def depth_first_search(game,x,y):
 
     while len(nodes_stack) != 0:
         node = deepcopy(nodes_stack.pop())
-        move = moves_stack.pop()
+        # move = moves_stack.pop()
 
         result = node.check_winner()
         if result != None: #result == node.player_2 or result == 'tie':
@@ -147,28 +147,3 @@ def find_source(board,target):
             if board[i][j] == target:
                 return [i,j]
     return []
-
-
-
-
-
-
-obj = TicTacToe()
-
-# # obj.board[0][0] = 'O'
-# # obj.board[2][1] = 'X'
-# # obj.board[0][1] = 'O'
-# # obj.board[0][2] = 'X'
-# # obj.board[1][0] = 'O'
-# # obj.board[2][0] = 'X'
-# obj.board[0][0] = 'O'
-# obj.board[0][1] = 'O'
-# obj.board[2][2] = 'X'
-# obj.board[0][2] = 'X'
-
-# print(obj.print_board())
-# move=best_move(obj)
-# print(move)
-# # new_obj = breadth_first_search(obj)
-
-# # print(new_obj.print_board())
